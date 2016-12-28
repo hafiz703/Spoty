@@ -7,26 +7,29 @@ import {
   View,
 } from 'react-native';
 import clrs from '../utils/clrs'
+import FadeInView from './FadeInView.js'
 
+const placeholder = require('../utils/placeholder.png');
 
-const placeholder = require('../utils/placeholder.png')
+const ListItems = ({index,text,imageUrl,navState, navigator}) => {
 
-const ListItems = ({text,imageUrl}) => {
 
   const image  = (
     imageUrl ? {uri : imageUrl} : placeholder
 
-  )
+  );
 
   return(
     <TouchableOpacity
-    underlayColor = {clrs.gray}>
+    underlayColor = {clrs.gray}
+    onPress = {() => navigator.push(navState)}>
+      <FadeInView delay = {index*50}>
+        <View style  = {styles.mediaObject}>
+          <Image source = {image} style = {styles.image} />
 
-      <View style  = {styles.mediaObject}>
-        <Image source = {image} style = {styles.image} />
-
-        <Text style = {styles.text} > {text} </Text>
-      </View>
+          <Text style = {styles.text} > {text} </Text>
+        </View>
+      </FadeInView>
     </TouchableOpacity>
   )
 }
